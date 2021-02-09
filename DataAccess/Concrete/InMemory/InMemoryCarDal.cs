@@ -11,79 +11,79 @@ namespace DataAccess.Concrete.InMemory
     //public class /*InMemoryCarDal : ICarDal*/
          public class InMemoryCarDal
     {
-        //List<Car> _cars;
-        //public InMemoryCarDal()
+        //list<car> _cars;
+        //public ınmemorycardal()
         //{
-        //    //Simulation of databeses which comes from Oracle,Sql Server,Postgres,MongoDb
-        //    _cars = new List<Car>
+        //    //simulation of databeses which comes from oracle,sql server,postgres,mongodb
+        //    _cars = new list<car>
         //    {
-        //        new Car{CarId=1, BrandId=1, ColorId=1, ModelYear=1994, DailyPrice= 800, Description="Manuel Dizel"},
-        //        new Car{CarId=2, BrandId=2, ColorId=2, ModelYear=1992, DailyPrice= 600, Description="Manuel Benzin"},
-        //        new Car{CarId=3, BrandId=3, ColorId=3, ModelYear=2016, DailyPrice= 950, Description="Otomatik Dizel"},
-        //        new Car{CarId=4, BrandId=4, ColorId=2, ModelYear=2016, DailyPrice=1.250, Description="Otomatik Dizel"},
-        //        new Car{CarId=5, BrandId=5, ColorId=5, ModelYear=2020, DailyPrice=3.000, Description="Otomatik Benzin"}
+        //        new car{carıd=1, brandıd=1, colorıd=1, modelyear=1994, dailyprice= 800, description="manuel dizel"},
+        //        new car{carıd=2, brandıd=2, colorıd=2, modelyear=1992, dailyprice= 600, description="manuel benzin"},
+        //        new car{carıd=3, brandıd=3, colorıd=3, modelyear=2016, dailyprice= 950, description="otomatik dizel"},
+        //        new car{carıd=4, brandıd=4, colorıd=2, modelyear=2016, dailyprice=1.250, description="otomatik dizel"},
+        //        new car{carıd=5, brandıd=5, colorıd=5, modelyear=2020, dailyprice=3.000, description="otomatik benzin"}
 
         //    };
         //}
-        //public void Add(Car car)
+        //public void add(car car)
         //{
 
-        //    if (_cars.Count(c => c.CarId == car.CarId) == 0)
-        //        _cars.Add(car);
+        //    if (_cars.count(c => c.carıd == car.carıd) == 0)
+        //        _cars.add(car);
 
-        //    _cars.Add(car);
+        //    _cars.add(car);
 
         //}
 
-        //public void Delete(Car car)
+        //public void delete(car car)
         //{
 
-        //    Car CarToDelete = _cars.FirstOrDefault(Car => Car.CarId == Car.CarId);
-        //    if (CarToDelete != null)
-        //     _cars.Remove(CarToDelete);
+        //    car cartodelete = _cars.firstordefault(car => car.carıd == car.carıd);
+        //    if (cartodelete != null)
+        //        _cars.remove(cartodelete);
 
         //}
 
-        //public Car Get(Expression<Func<Car, bool>> filter)
+        //public car get(expression<func<car, bool>> filter)
         //{
-        //    throw new NotImplementedException();
+        //    throw new notımplementedexception();
         //}
 
-        //public List<Car> GetAll()
+        //public list<car> getall()
         //{
 
         //    return _cars;
-    
+
         //}
 
-        //public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
+        //public list<car> getall(expression<func<car, bool>> filter = null)
         //{
-        //    throw new NotImplementedException();
+        //    throw new notımplementedexception();
         //}
 
-        //public List<Car> GetAllByCategory(int categoryId)
+        //public list<car> getallbycategory(int categoryıd)
         //{
 
-        //    return _cars.Where(c => c.CarId == categoryId).ToList();
+        //    return _cars.where(c => c.carıd == categoryıd).tolist();
 
-        //    throw new NotImplementedException();
+        //    throw new notımplementedexception();
 
         //}
 
-        //public void Update(Car car)
+        //public void update(car car)
         //{
-        //    Car CarToUpdate = _cars.SingleOrDefault(Car => Car.CarId == car.CarId);
+        //    car cartoupdate = _cars.singleordefault(car => car.carıd == car.carıd);
 
-        //    if (CarToUpdate == null) return;
+        //    if (cartoupdate == null) return;
 
-        //    CarToUpdate.BrandId = car.BrandId;
-        //    CarToUpdate.ColorId = car.ColorId;
-        //    CarToUpdate.DailyPrice = car.DailyPrice;
-        //    CarToUpdate.ModelYear = car.ModelYear;
-        //    CarToUpdate.Description = car.Description;
+        //    cartoupdate.brandıd = car.brandıd;
+        //    cartoupdate.colorıd = car.colorıd;
+        //    cartoupdate.dailyprice = car.dailyprice;
+        //    cartoupdate.modelyear = car.modelyear;
+        //    cartoupdate.description = car.description;
 
         //}
-        
+
 
     }
 }

@@ -1,8 +1,10 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Business.Concrete
@@ -36,7 +38,13 @@ namespace Business.Concrete
         }
         public void Add(Car car)
         {
-            if (checkCarDescriptionValue(car) == true & checkCarDailyPriceValue(car) == true)
+            if(_carDal.GetAll(x => x.BrandId != default(int)).Count(x=>x.BrandId == car.BrandId) > 0)
+            {
+                Console.WriteLine("Aynı Brand Id'den araç bulundu");
+                return;
+            }
+
+            if (checkCarDescriptionValue(car) == true && checkCarDailyPriceValue(car) == true)
             {
                 _carDal.Add(car);
                 Console.WriteLine("Araba başarıyla eklendi.");
@@ -49,6 +57,8 @@ namespace Business.Concrete
                 }
                     Console.WriteLine("Araba ekleme işleminiz başarısız oldu. --> Araba isminiz minimum 2 karakter olmak üzere giriniz");
             }
+
+           
         }
 
         public void Delete(Car car)
@@ -98,6 +108,12 @@ namespace Business.Concrete
             {
                 Console.WriteLine($"Lütfen günlük fiyat kısmını 0'dan büyük giriniz. Girdiğiniz değer : {car.DailyPrice}");
             }
+
+        }
+
+        public List<CarDetailDto> GetCarDetailDtos()
+        {
+            return _carDal.GetCarDetailDtos();
         }
     }
 }

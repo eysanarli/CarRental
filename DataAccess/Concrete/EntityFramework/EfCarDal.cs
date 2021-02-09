@@ -1,5 +1,7 @@
-﻿using DataAccess.Abstract;
+﻿using Core.DataAccess.EntityFramework;
+using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,52 +11,30 @@ using System.Text;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfCarDal : ICarDal
+    public class EfCarDal : EfEntityRepositoryBase<Car, NorthwindRentACarContext>, ICarDal
     {
-        public void Add(Car entity)
-        {
-            //Disposable pattern implementation of c# 
-            using (var context= new NorthwindRentACarContext())
-            {
-                var addedCar = context.Entry(entity);
-                addedCar.State = EntityState.Added;
-                context.SaveChanges();
-            }
-        }
-
-        public void Delete(Car entity)
+        public List<CarDetailDto> GetCarDetailDtos(Expression<Func<Car, bool>> filter = null)
         {
             using (NorthwindRentACarContext context = new NorthwindRentACarContext())
             {
-                var deletedCar = context.Entry(entity);
-                deletedCar.State = EntityState.Deleted;
-                context.SaveChanges();
-            }
-        }
+                var result = from cr in filter is null ? context.Cars : context.Cars.Where(filter)
+                             join br in context.Brands
+                             on cr.BrandId equals br.BrandId
+                             join clr in context.Colors
+                             on cr.ColorId equals clr.ColorId
+                             select new CarDetailDto
+                             {
+                                 Id = cr.CarId,
+                                 BrandId = br.BrandId,
+                                 ColorId = clr.ColorId,
+                                 BrandName = br.BrandName,
+                                 ColorName = clr.ColorName,
+                                 DailyPrice = cr.DailyPrice,
+                                 Descriptions = cr.Descriptions,
+                                 ModelYear = cr.ModelYear
+                             };
 
-        public Car Get(Expression<Func<Car, bool>> filter)
-        {
-            using (NorthwindRentACarContext context = new NorthwindRentACarContext())
-            {
-                return context.Set<Car>().SingleOrDefault(filter);
-            }
-        }
-
-        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
-        {
-            using (NorthwindRentACarContext context = new NorthwindRentACarContext())
-            {
-                return filter == null ? context.Set<Car>().ToList() : context.Set<Car>().Where(filter).ToList();
-            }
-        }
-
-        public void Update(Car entity)
-        {
-            using (NorthwindRentACarContext context = new NorthwindRentACarContext())
-            {
-                var updatedCar = context.Entry(entity);
-                updatedCar.State = EntityState.Modified;
-                context.SaveChanges();
+                return result.ToList();
             }
         }
     }
