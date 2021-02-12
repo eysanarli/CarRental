@@ -25,19 +25,27 @@ namespace ConsoleUI
             Designer.PrintRow("Car ID", "Brand Name", "Color Name", "Model Year", "Daily Price", "Description");
             Designer.PrintLine();
 
-            foreach (var car in carManager.GetAll())
+            foreach (var car in carManager.GetAll().Data)
             {
-                Designer.PrintRow(car.CarId.ToString(), brandManager.GetById(car.BrandId).BrandName, colorManager.GetById(car.ColorId).ColorName, car.ModelYear.ToString(), car.DailyPrice.ToString(), car.Descriptions);
+                Designer.PrintRow(car.CarId.ToString(), brandManager.GetById(car.BrandId).Data.BrandName, colorManager.GetById(car.ColorId).Data.ColorName, car.ModelYear.ToString(), car.DailyPrice.ToString(), car.Descriptions);
             }
 
             Designer.PrintLine();
 
+            var result = carManager.GetCarDetails();
 
-            foreach (var car in carManager.GetCarDetailDtos())
+            if (result.Success)
             {
-                Console.WriteLine( "Günlük Kiralama Ücreti  " + car.DailyPrice);
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine("Günlük Kiralama Ücreti  " + car.DailyPrice);
+                }
             }
-
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+            
 
             brandManager.Add(new Brand { BrandName = "HONDA CHR" });
             var newCar = new Car { BrandId = 6, ColorId = 3, DailyPrice = 300, ModelYear = 2021, Descriptions = "Otomatik Dizel" };
@@ -46,7 +54,7 @@ namespace ConsoleUI
             Console.WriteLine("Yeni Araba Eklendi");
             Console.WriteLine();
 
-            Designer.PrintRow(newCar.CarId.ToString(), brandManager.GetById(newCar.BrandId).BrandName, colorManager.GetById(newCar.ColorId).ColorName, newCar.ModelYear.ToString(), newCar.DailyPrice.ToString(), newCar.Descriptions);
+            Designer.PrintRow(newCar.CarId.ToString(), brandManager.GetById(newCar.BrandId).Data.BrandName, colorManager.GetById(newCar.ColorId).Data.ColorName, newCar.ModelYear.ToString(), newCar.DailyPrice.ToString(), newCar.Descriptions);
             Designer.PrintLine();
 
 
