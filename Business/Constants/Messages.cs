@@ -24,11 +24,32 @@ namespace Business.Constants
         public static string BrandUpdatedInvalid = "Lütfen marka isminin uzunluğunu 1 karakterden fazla olmak üzere giriniz.";
         public static string BrandList = "Markalar listesi";
 
-        public static string ColorAdded = "Renk eklendi";
-        public static string ColorDeleted = "Renk silindi";
-        public static string ColorUpdated = "Renk güncellendi";
+        public static string ColorAdded = "Renk başarıyla eklendi";
+        public static string ColorDeleted = "Renk başarıyla silindi";
+        public static string ColorUpdated = "Renk başarıyla güncellendi";
         public static string ColorList = "Renkler listesi";
 
-       
+        public static string UserEmailExist = "Aynı email adresinden mevcut, lütfen farklı bir email adresiyle deneyiniz";
+        public static string UserAdded = "Kullanıcı başarıyla eklendi";
+        public static string UserDeleted = "Kullanıcı başarıyla silindi";
+        public static string UserUpdated = "Kullanıcı başarıyla güncellendi";
+        public static string UserGetById = "Kullanıcı detay getirildi";
+        public static string UsersListed = "Kullanıcılar listelendi";
+        public static string UserNameInvalid = "Kullanıcı ismi geçersiz";
+
+        public static string CustomerCompanyExist = "Aynı şirket isminden mevcut,ekleme başarısız.";
+        public static string CustomerAdded = "Müşteri başarıyla eklendi";
+        public static string CustomerDeleted = "Müşteri başarıyla silindi";
+        public static string CustomerUpdated = "Müşteri başarıyla güncellendi";
+        public static string CustomerGetById = "Müşteri detay getirildi";
+        public static string CustomersListed = "Müşteriler listelendi";
+        public static string CustomerNameInvalid = "Müşteri ismi geçersiz";
+
+        public static string RentalAdded = "Araba başarıyla kiralandı";
+        public static string RentalDeleted = "Araba başarıyla kiralama listesinden silindi";
+        public static string RentalUpdated = "Araba kiralama listesi başarıyla güncellendi";
+        public static string RentalGetById = "Araba kiralama detay getirildi";
+        public static string RentalInvalid = "Araba henüz teslim edilmemiş";
+
     }
 }
