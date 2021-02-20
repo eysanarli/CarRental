@@ -31,20 +31,20 @@ namespace WebAPI
         {
             services.AddControllers();
             //BLL
-            services.AddSingleton<IBrandService, BrandManager>();
-            services.AddSingleton<ICarService, CarManager>();
-            services.AddSingleton<IColorService, ColorManager>();
-            services.AddSingleton<ICustomerService, CustomerManager>();
-            services.AddSingleton<IRentalService, RentalManager>();
-            services.AddSingleton<IUserService, UserManager>();
+            //services.AddSingleton<IBrandService, BrandManager>();
+            //services.AddSingleton<ICarService, CarManager>();
+            //services.AddSingleton<IColorService, ColorManager>();
+            //services.AddSingleton<ICustomerService, CustomerManager>();
+            //services.AddSingleton<IRentalService, RentalManager>();
+            //services.AddSingleton<IUserService, UserManager>();
 
             //DAL
-            services.AddSingleton<IBrandDal, EfBrandDal>();
-            services.AddSingleton<ICarDal, EfCarDal>();
-            services.AddSingleton<IColorDal, EfColorDal>();
-            services.AddSingleton<ICustomerDal, EfCustomerDal>();
-            services.AddSingleton<IRentalDal, EfRentalDal>();
-            services.AddSingleton<IUserDal, EfUserDal>();
+            //services.AddSingleton<IBrandDal, EfBrandDal>();
+            //services.AddSingleton<ICarDal, EfCarDal>();
+            //services.AddSingleton<IColorDal, EfColorDal>();
+            //services.AddSingleton<ICustomerDal, EfCustomerDal>();
+            //services.AddSingleton<IRentalDal, EfRentalDal>();
+            //services.AddSingleton<IUserDal, EfUserDal>();
 
         }
 
