@@ -1,14 +1,16 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Business.Concrete
 {
@@ -20,48 +22,18 @@ namespace Business.Concrete
         {
             _carDal = carDal;
         }
-        private bool checkCarDescriptionValue(Car car)
-        {
-            bool checkValue = true;
-
-            if (car.Descriptions.Length <= 2)
-                checkValue = false;
-
-            return checkValue;
-        }
-
-        private bool checkCarDailyPriceValue(Car car)
-        {
-            bool checkValue = true;
-
-            if (car.DailyPrice == 0)
-                checkValue = false;
-
-            return checkValue;
-        }
+        
         public IResult Add(Car car)
         {
-            if (_carDal.GetAll(x => x.BrandId != default(int)).Count(x=>x.BrandId == car.BrandId) > 0)
+            if (_carDal.GetAll(x => x.BrandId != default(int)).Count(x => x.BrandId == car.BrandId) > 0)
             {
-                return new ErrorResult(Messages.BrandIdExist);    
+                return new ErrorResult(Messages.BrandIdExist);
             }
- 
-            if (checkCarDescriptionValue(car) == true && checkCarDailyPriceValue(car) == true)
-            {
-                _carDal.Add(car);
-                return new SuccessResult(Messages.CarAdded);
-                
-            }
-            else if (!checkCarDescriptionValue(car))
-                return new ErrorResult(Messages.CarDescriptionInvalid);
-            {
+            
+            ValidationTool.Validate(new CarValidator(), car);
 
-                if (!checkCarDailyPriceValue(car))
-                {
-                    return new ErrorResult(Messages.CarNameInvalid);
-                }
-                    return new ErrorResult(Messages.CarDailyPriceInvalid);
-            } 
+            _carDal.Add(car);
+            return new SuccessResult(Messages.CarAdded);
         }
         public IResult Delete(Car car)
         {
