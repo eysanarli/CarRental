@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
@@ -22,16 +23,13 @@ namespace Business.Concrete
         {
             _carDal = carDal;
         }
-        
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
             if (_carDal.GetAll(x => x.BrandId != default(int)).Count(x => x.BrandId == car.BrandId) > 0)
             {
                 return new ErrorResult(Messages.BrandIdExist);
             }
-            
-            ValidationTool.Validate(new CarValidator(), car);
-
             _carDal.Add(car);
             return new SuccessResult(Messages.CarAdded);
         }
@@ -43,10 +41,10 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>> GetAll()
         {
-            if (DateTime.Now.Hour == 23)
-            {
-                return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
-            }
+            //if (DateTime.Now.Hour == 23)
+            //{
+            //    return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
+            //}
 
                 return new SuccessDataResult<List<Car>>(_carDal.GetAll(),Messages.CarList);
         }
@@ -75,7 +73,7 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ModelYear == year));
         }
-
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Update(Car car)
         {
             if (car.DailyPrice > 0)
