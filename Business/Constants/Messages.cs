@@ -51,5 +51,7 @@ namespace Business.Constants
         public static string RentalGetById = "Araba kiralama detay getirildi";
         public static string RentalInvalid = "Araba henüz teslim edilmemiş";
 
+        public static string NumberOfPictureError = "Arabaya ait resimler en fazla 5 tane olabilir";
+        public static string InvalidFileType = "Dosya tipi geçersiz";
     }
 }

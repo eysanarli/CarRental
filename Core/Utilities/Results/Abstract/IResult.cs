@@ -9,5 +9,6 @@ namespace Core.Utilities.Results.Abstract
         //Temel voidleri IResult yapısı ile süslüyoruz 
         bool Success { get; }
         string Message { get; }
+        
     }
 }
