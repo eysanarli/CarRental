@@ -1,4 +1,5 @@
 ﻿using Business.Constants;
+using Core.Entities.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
@@ -9,25 +10,25 @@ using System.Text;
 
 namespace Business.ValidationRules.FluentValidation
 {
-    public class UserValidator: AbstractValidator<User>
+    public class UserValidator : AbstractValidator<User>
     {
         IUserDal _userDal = new EfUserDal();
         public UserValidator()
         {
             RuleFor(usr => usr.FirstName).MinimumLength(2);
             RuleFor(usr => usr.LastName).MinimumLength(2);
-            RuleFor(usr => usr.Password).NotEmpty();
+            RuleFor(usr => usr.PasswordSalt).NotEmpty();
             RuleFor(usr => usr.Email).NotEmpty();
-            RuleFor(usr => usr.Password).MaximumLength(15);
-            RuleFor(u => u.Email).Must(checkOtherEmail).WithMessage(Messages.UserEmailExist);
+            //RuleFor(usr => usr.Password).MaximumLength(15);
+           // RuleFor(u => u.Email).Must(checkOtherEmail).WithMessage(Messages.UserEmailExist);
 
         }
 
-        private bool checkOtherEmail(string arg)
-        {
-            var otherUsers = _userDal.GetAll();
-            var emails = otherUsers.Find(e => e.Email == arg);
-            return emails.Email.Equals(null);
-        }
+        //private bool checkOtherEmail(string arg)
+        //{
+        //    var otherUsers = _userDal.GetAll();
+        //    var emails = otherUsers.Find(e => e.Email == arg);
+        //    return emails.Email.Equals(null);
+        //}
     }
 }

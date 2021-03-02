@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -24,6 +25,8 @@ namespace Business.Concrete
             _carDal = carDal;
         }
         [ValidationAspect(typeof(CarValidator))]
+
+        [SecuredOperation("car.add, admin")]
         public IResult Add(Car car)
         {
             if (_carDal.GetAll(x => x.BrandId != default(int)).Count(x => x.BrandId == car.BrandId) > 0)
@@ -41,12 +44,12 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>> GetAll()
         {
-            //if (DateTime.Now.Hour == 23)
-            //{
-            //    return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
-            //}
+            if (DateTime.Now.Hour == 2)
+            {
+                return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
+            }
 
-                return new SuccessDataResult<List<Car>>(_carDal.GetAll(),Messages.CarList);
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.CarList);
         }
 
         public IDataResult<List<Car>> GetAllByBrandId(int id)
