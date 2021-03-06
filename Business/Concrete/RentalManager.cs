@@ -1,6 +1,8 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
@@ -20,6 +22,9 @@ namespace Business.Concrete
         {
             _rentalDal = rentalDal;
         }
+
+        [CacheRemoveAspect("IRentalService.Get")]
+        [SecuredOperation("Kullanici")]
         [ValidationAspect(typeof(RentalValidator))]
         public IResult Add(Rental rental)
         {
