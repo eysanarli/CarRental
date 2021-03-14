@@ -29,8 +29,7 @@ namespace Business.Concrete
 
         //[TransactionScopeAspect]
         [ValidationAspect(typeof(CarValidator))]
-        [SecuredOperation("car.add, admin")]
-
+        //[SecuredOperation("car.add, admin")]
         public IResult Add(Car car)
         {
             //if (_carDal.GetAll(x => x.BrandId != default(int)).Count(x => x.BrandId == car.BrandId) > 0)
@@ -46,7 +45,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarDeleted);
         }
 
-        [SecuredOperation("cars.getall")]
+        ////[SecuredOperation("cars.getall")]
         //[PerformanceAspect(2)]
         //[CacheAspect]
         public IDataResult<List<Car>> GetAll()
