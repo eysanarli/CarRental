@@ -37,6 +37,24 @@ namespace WebAPI.Controllers
         }
 
 
+        [HttpGet("getcarsbybrand")]
+        public IActionResult GetCarsByBrand(string brand)
+        {
+            var result = _carService.GetCarsByBrand(brand);
+            if (result.Success) { return Ok(result); }
+            return BadRequest();
+        }
+
+        [HttpGet("getcarsbycolor")]
+        public IActionResult GetCarsByColor(string color)
+        {
+            var result = _carService.GetCarsByColor(color);
+            if (result.Success) { return Ok(result); }
+            return BadRequest();
+        }
+
+
+
         [HttpGet("getbyid")]
         public IActionResult GetById(int id)
         {
@@ -44,6 +62,7 @@ namespace WebAPI.Controllers
             if (result.Success) { return Ok(result); }
             return BadRequest();
         }
+
 
         [HttpPost("add")]
         public IActionResult Add(Car car)

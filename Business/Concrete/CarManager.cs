@@ -114,5 +114,15 @@ namespace Business.Concrete
 
             return null;
         }
+
+        public IDataResult<List<CarDetailDto>> GetCarsByBrand(string brand)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails().Where(c=>c.BrandName == brand).ToList());
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarsByColor(string color)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails().Where(c => c.ColorName == color).ToList());
+        }
     }
 }
